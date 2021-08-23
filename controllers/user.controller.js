@@ -56,10 +56,9 @@ const userPost = async (req, res = response) => {
 
 const userDelete = async (req, res = response) => {
   const { id } = req.params;
+  //const userAuth = req.user;
   const usuario = await Usuario.findByIdAndUpdate(id, { estate: false });
-  res.json({
-    usuario,
-  });
+  res.json(usuario);
 };
 
 module.exports = { userGet, userPut, userPost, userDelete };
