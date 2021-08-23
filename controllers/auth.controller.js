@@ -60,7 +60,6 @@ const googleSignIn = async (req = request, res = response) => {
         password: ":P",
         img,
         google: true,
-        role: "USER_ROLE",
       };
       usuario = new Usuario(data);
       await usuario.save();
