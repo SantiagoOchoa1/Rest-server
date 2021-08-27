@@ -9,6 +9,13 @@ class Server {
 
     //conectar a base de datos
     this.connectDB();
+    this.routePath = {
+      auth: "/api/auth",
+      buscar: "/api/buscar",
+      categorias: "/api/categorias",
+      productos: "/api/productos",
+      users: "/api/users",
+    };
 
     //middlewares
     this.middlewares();
@@ -29,8 +36,11 @@ class Server {
   }
 
   routes() {
-    this.app.use("/api/auth", require("../routes/auth"));
-    this.app.use("/api/users", require("../routes/user"));
+    this.app.use(this.routePath.auth, require("../routes/auth"));
+    this.app.use(this.routePath.buscar, require("../routes/buscar"));
+    this.app.use(this.routePath.categorias, require("../routes/categorias"));
+    this.app.use(this.routePath.productos, require("../routes/productos"));
+    this.app.use(this.routePath.users, require("../routes/user"));
   }
 
   listen() {

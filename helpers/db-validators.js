@@ -1,5 +1,4 @@
-const Role = require("../models/role.db");
-const Usuario = require("../models/user.db");
+const { Role, Producto, Usuario, Categoria } = require("../models");
 
 // Validar si el rol está entre los roles permitidos
 const validarRole = async (role = "") => {
@@ -25,4 +24,25 @@ const validarUsuarioPorId = async (id) => {
   }
 };
 
-module.exports = { validarRole, validarCorreoExiste, validarUsuarioPorId };
+// Verificar si existe categoria por ID dado
+const validarCategoriaPorId = async (id) => {
+  const existeCategoria = await Categoria.findById(id);
+  if (!existeCategoria) {
+    throw new Error(`La categoria con id ${id} no existe`);
+  }
+};
+
+const validarProductoPorId = async (id) => {
+  const existeProducto = await Producto.findById(id);
+  if (!existeProducto) {
+    throw new Error(`El producto con id ${id} no existe`);
+  }
+};
+
+module.exports = {
+  validarRole,
+  validarCorreoExiste,
+  validarUsuarioPorId,
+  validarCategoriaPorId,
+  validarProductoPorId,
+};
